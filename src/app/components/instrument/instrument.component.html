@@ -1,0 +1,18 @@
+<div class="instrument" [class.hide-change]="showChange() === false">
+  <div class="column">
+    <span class="symbol">{{ data().symbol }}</span>
+    <span class="share">{{ data().share }} shares</span>
+  </div>
+  <div class="price">
+    {{ data().ask | currency : "AUD" : "symbol-narrow" : "1.2-2" }}
+  </div>
+  @if (showChange()) {
+  <div
+    class="change"
+    [class.positive]="change()! > 0"
+    [class.negative]="change()! < 0"
+  >
+    {{ change() >= 0 ? "+" : "" }}{{ change() | number : "1.2-2" }}%
+  </div>
+  }
+</div>

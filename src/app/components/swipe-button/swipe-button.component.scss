@@ -1,0 +1,23 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-radius: 54px;
+  padding: 2px;
+  height: 50px;
+  background-color: var(--ion-color-primary);
+  color: #fff;
+  transition: transform 0.3s ease-out;
+}
+
+.button {
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  background-color: #fff;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  transform: translateX(0);
+}

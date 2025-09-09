@@ -1,0 +1,39 @@
+<ion-header class="ion-no-border header">
+  <ion-toolbar>
+    <ion-searchbar
+      class="search-bar"
+      show-cancel-button="focus"
+      placeholder="Search"
+      [debounce]="500"
+      (ionInput)="handleSearch($event)"
+    ></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="content" [fullscreen]="true">
+  @if (filteredStocks$ | async; as filteredStocks;) { @if (filteredStocks.length
+  > 0) {
+  <ion-list class="search-result">
+    @for(stock of filteredStocks; track stock.symbol) {
+    <ion-item>
+      <ion-label class="search-label">
+        <div class="symbol">{{ stock.symbol }}</div>
+        <div class="full-name">{{ stock.fullName }}</div>
+      </ion-label>
+    </ion-item>
+    }
+  </ion-list>
+  } }
+  <div class="container">
+    <section class="searched-section">
+      <h4>Recently searched</h4>
+      @for (item of mockSearchedData; track item.symbol) {
+      <app-instrument [data]="item" [showChange]="false"></app-instrument>
+      }
+    </section>
+    <section class="top-volume-section">
+      <h4>Top 3 volume stock</h4>
+      <app-card [data]="mockTopVolumeData"></app-card>
+    </section>
+  </div>
+</ion-content>

@@ -1,0 +1,85 @@
+@use "sass-variables" as *;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: $spacer * 4;
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+  padding: $spacer * 4;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.symbol,
+.full-name,
+.delimiter {
+  color: #7e7e7e;
+}
+
+.small {
+  width: 126px;
+
+  .logo {
+    width: 32px;
+    height: 32px;
+    padding: $spacer;
+  }
+
+  .symbol {
+    font-size: var(--font-size-body-b2);
+  }
+
+  .full-name {
+    height: 29px;
+    font-size: var(--font-size-body-b3);
+  }
+
+  .price {
+    margin-top: $spacer * 3;
+  }
+}
+
+.large {
+  width: 100%;
+
+  .logo {
+    width: 32px;
+    height: 32px;
+    padding: $spacer;
+  }
+
+  .symbol,
+  .full-name,
+  .delimiter {
+    font-size: var(--font-size-body-b2);
+  }
+
+  .price {
+    font-size: var(--font-size-h4);
+  }
+
+  .extra-info {
+    display: flex;
+    gap: $spacer * 6;
+    margin-top: $spacer * 4;
+    border-top: 1px solid #e3e3e3;
+    padding-top: $spacer * 3;
+    color: #434343;
+  }
+
+  .extra-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+}

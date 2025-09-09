@@ -1,2 +1,117 @@
+@use "sass-variables" as *;
+
 // For information on how to create your own theme, please see:
 // http://ionicframework.com/docs/theming/
+
+@font-face {
+  font-family: "Universal Sans";
+  src: url("/assets/fonts/UniversalSans-500.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --ion-font-family: "Universal Sans", "Open Sans", sans-serif;
+  --ion-color-primary: #141414;
+  --ion-color-secondary: #4148fb;
+  --ion-text-color: var(--ion-color-primary);
+  --ion-tab-bar-color: #959595;
+  --ion-tab-bar-color-selected: var(--ion-color-primary);
+  --ion-toolbar-background: #fff;
+  --ion-color-success: #22b692;
+  --ion-color-danger: #b52121;
+
+  --font-size-h1: 28px;
+  --font-size-h3: 22px;
+  --font-size-h4: 18px;
+  --font-size-h5: 16px;
+  --font-size-h6: 14px;
+  --font-size-label-l3: 12px;
+  --font-size-body-b2: 14px;
+  --font-size-body-b3: 12px;
+  --font-size-body-b4: 10px;
+  --font-size-body-b5: 13px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: bold;
+  color: var(--ion-color-primary);
+  letter-spacing: 0.1rem;
+  margin: 0;
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+}
+
+h3 {
+  font-size: var(--font-size-h3);
+}
+
+h4 {
+  font-size: var(--font-size-h4);
+}
+
+h5 {
+  font-size: var(--font-size-h5);
+}
+
+h6 {
+  font-size: var(--font-size-h6);
+}
+
+.font-size-label-l3 {
+  font-size: var(--font-size-label-l3);
+}
+
+.font-size-body-b2 {
+  font-size: var(--font-size-body-b2);
+}
+
+.font-size-body-b3 {
+  font-size: var(--font-size-body-b3);
+}
+
+.font-size-body-b5 {
+  font-size: var(--font-size-body-b5);
+}
+
+.ion-color-success.custom-toast {
+  --border-radius: 6px;
+  --box-shadow: none;
+  --ion-color-success: #f1fbf9;
+  --ion-color-success-contrast: var(--ion-color-primary);
+  text-align: center;
+}
+
+ion-header {
+  background-color: #fff;
+}
+
+ion-toolbar {
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --padding-start: 0;
+  --padding-end: 0;
+}
+
+ion-content {
+  --padding-top: #{$spacer * 4};
+  --padding-bottom: #{$spacer * 4};
+  --padding-start: #{$spacer * 6};
+  --padding-end: #{$spacer * 6};
+}
+
+ion-searchbar {
+  padding: 0;
+}
+
+ion-item {
+  --inner-border-width: 0;
+}

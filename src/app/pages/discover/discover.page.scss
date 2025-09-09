@@ -1,0 +1,53 @@
+@use "sass-variables" as *;
+
+.header {
+  padding: $spacer * 4 $spacer * 6 0;
+}
+
+.search-bar {
+  padding-inline-start: 0;
+  padding-inline-end: 0;
+  padding-bottom: 0;
+  --border-radius: 32px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: $spacer * 10;
+  position: relative;
+}
+
+.searched-section {
+  display: flex;
+  flex-direction: column;
+  gap: $spacer * 4;
+}
+
+.top-volume-section {
+  display: flex;
+  flex-direction: column;
+  gap: $spacer * 4;
+}
+
+.search-result {
+  position: absolute;
+  top: 56px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9;
+}
+
+.search-label {
+  padding: $spacer * 2 0;
+
+  .symbol {
+    font-size: var(--font-size-body-b2);
+  }
+
+  .full-name {
+    color: #959595;
+    font-size: var(--font-size-body-b3);
+  }
+}

@@ -1,0 +1,26 @@
+@use "sass-variables" as *;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: $spacer * 21;
+  width: 100%;
+  padding: $spacer * 8 $spacer * 4 $spacer * 4;
+}
+
+.title {
+  margin-bottom: $spacer * 6;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: $spacer * 2;
+}
+
+.input {
+  border: 1px solid #e9e9e9;
+  border-radius: 4px;
+  padding: 0 $spacer * 4;
+}

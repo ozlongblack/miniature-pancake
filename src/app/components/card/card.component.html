@@ -1,0 +1,49 @@
+@if (type() === cardType.Small) {
+<a class="card small" (click)="onClick.emit(data())">
+  <div class="row">
+    <div class="logo"><img [src]="data().logo" /></div>
+    <app-type [type]="data().type"></app-type>
+  </div>
+  <div class="column">
+    <div class="symbol">{{ data().symbol }}</div>
+    <div class="full-name">{{ data().fullName }}</div>
+    <div class="price">
+      {{ data().ask | currency : "AUD" : "symbol-narrow" : "1.2-2" }}
+    </div>
+  </div>
+</a>
+} @else if (type() === cardType.Large) {
+<a class="card large" (click)="onClick.emit(data())">
+  <div class="row">
+    <div class="logo"><img [src]="data().logo" /></div>
+    <app-type [type]="data().type"></app-type>
+  </div>
+  <div class="column">
+    <div class="price">
+      {{ data().ask | currency : "AUD" : "symbol-narrow" : "1.2-2" }}
+    </div>
+    <div>
+      <span class="symbol">{{ data().symbol }}</span
+      ><span class="delimiter">&nbsp;•&nbsp;</span>
+      <span class="full-name">{{ data().fullName }}</span>
+    </div>
+    <div class="extra-info">
+      <div class="extra-item">
+        <img src="/assets/icons/circle-dollar.svg" /><span>{{
+          data().volume | shortCurrency
+        }}</span>
+      </div>
+      <div class="extra-item">
+        <img src="/assets/icons/target.svg" /><span>{{
+          data().marketCap | shortCurrency
+        }}</span>
+      </div>
+      <div class="extra-item">
+        <img src="/assets/icons/square-dollar.svg" /><span>{{
+          data().ask | shortCurrency
+        }}</span>
+      </div>
+    </div>
+  </div>
+</a>
+}

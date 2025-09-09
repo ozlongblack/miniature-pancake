@@ -1,0 +1,46 @@
+@use "sass-variables" as *;
+
+.instrument {
+  display: grid;
+  grid-template-columns: 1fr auto 80px;
+  align-items: center;
+  gap: $spacer * 3;
+
+  &.hide-change {
+    grid-template-columns: 1fr auto;
+  }
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.symbol {
+  font-size: var(--font-size-body-b2);
+}
+
+.share {
+  font-size: var(--font-size-body-b3);
+  color: #7e7e7e;
+}
+
+.price {
+  font-size: var(--font-size-body-b5);
+}
+
+.change {
+  border-radius: 4px;
+  padding: $spacer $spacer * 2;
+  color: #fff;
+  font-size: var(--font-size-body-b5);
+  text-align: center;
+
+  &.positive {
+    background-color: var(--ion-color-success);
+  }
+  &.negative {
+    background-color: var(--ion-color-danger);
+  }
+}

@@ -1,0 +1,36 @@
+<div class="section">
+  <h3 class="title">
+    {{ data.symbol }}
+    {{ data.ask | currency : "AUD" : "symbol-narrow" : "1.2-2" }}
+  </h3>
+  <div class="form">
+    <div class="input">
+      <ion-input
+        label="Price"
+        labelPlacement="stacked"
+        placeholder="Price"
+        value="At Market"
+        [debounce]="500"
+      ></ion-input>
+    </div>
+    <div class="input">
+      <ion-input
+        label="Amount"
+        labelPlacement="stacked"
+        placeholder="Amount"
+        value="5.1"
+        [debounce]="500"
+      ></ion-input>
+    </div>
+    <div class="input">
+      <ion-input
+        label="Amount"
+        labelPlacement="stacked"
+        placeholder="Amount"
+        value="500"
+        [debounce]="500"
+      ></ion-input>
+    </div>
+  </div>
+</div>
+<div><app-swipe-button (complete)="dismiss()"></app-swipe-button></div>
