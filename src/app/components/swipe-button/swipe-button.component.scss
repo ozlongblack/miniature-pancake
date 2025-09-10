@@ -21,3 +21,12 @@
   border-radius: 50%;
   transform: translateX(0);
 }
+
+.label {
+  user-select: none;
+}
+
+.image {
+  user-select: none;
+  pointer-events: none;
+}
