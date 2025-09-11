@@ -1,10 +1,10 @@
 import { Component, EnvironmentInjector, inject } from '@angular/core';
 import {
+  IonIcon,
+  IonLabel,
   IonTabs,
   IonTabBar,
   IonTabButton,
-  IonIcon,
-  IonLabel,
 } from '@ionic/angular/standalone';
 
 @Component({

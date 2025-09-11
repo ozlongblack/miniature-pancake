@@ -120,14 +120,14 @@ The application is built using a modular component-based architecture. To ensure
 
 - **Cards:** A single card component can render in three distinct UIs (small, medium, large) by accepting an **`Enum` type** as an input, providing layout flexibility without needing multiple components.
 - **Instrument Displays:** Standardized components for presenting financial instrument data.
-- **Modals:** Although a bottom sheet-style modal was intended to appear from the bottom of the screen, a styling issue resulted in the modals appearing in a full-screen format.
+- **Modals:** Although a bottom sheet-style modal was intended to appear from the bottom of the screen.
 - **Swipe Buttons:** A unique UI element for user actions, enhancing the mobile experience.
 
 ### **Services**
 
 The application's business logic is separated into dedicated services. These services are responsible for:
 
-- **Data Retrieval:** For scenarios where multiple dynamic data sources need to be combined (e.g., merging static instrument details with live pricing data), the `combineLatest` RxJS operator is used. This allows the application to react to changes in any of the data streams. To prevent unnecessary API calls when multiple components subscribe to the same data stream, the `shareReplay` operator is used, ensuring that the API is called only once and the result is shared among all subscribers.
+- **Data Retrieval:** For scenarios where multiple dynamic data sources need to be combined (e.g., merging static instrument details with live pricing data), the `combineLatest` RxJS operator is used. This allows the application to react to changes in any of the data streams.
 - **State Management:** **`BehaviorSubject`** is used to implement a multicast stream, allowing multiple components to subscribe to and receive the current state and any subsequent updates.
 
 ### **Styling**

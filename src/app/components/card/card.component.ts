@@ -5,6 +5,7 @@ import {
   output,
 } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
+
 import { TypeComponent } from '@components/type/type.component';
 import { CardType } from '@interfaces/card';
 import { Stock } from '@interfaces/stock';

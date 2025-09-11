@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { BehaviorSubject, Observable, combineLatest, map } from 'rxjs';
+
 import { Stock, StockDetails, StockPrice } from '@interfaces/stock';
-import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',

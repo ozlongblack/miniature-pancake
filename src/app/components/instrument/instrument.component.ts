@@ -5,6 +5,7 @@ import {
   computed,
   input,
 } from '@angular/core';
+
 import { Instrument } from '@interfaces/stock';
 
 @Component({

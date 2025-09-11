@@ -3,9 +3,9 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
+  ViewChild,
   inject,
   output,
-  ViewChild,
 } from '@angular/core';
 import { GestureController } from '@ionic/angular/standalone';
 
@@ -34,6 +34,8 @@ export class SwipeButtonComponent implements AfterViewInit {
     this.panGesture = this.gestureCtrl.create({
       el: element,
       gestureName: 'pan',
+      direction: 'x',
+      gesturePriority: 100,
       onStart: (ev) => {
         this.initialX = ev.currentX;
       },

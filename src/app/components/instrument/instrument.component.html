@@ -1,7 +1,7 @@
 <div class="instrument" [class.hide-change]="showChange() === false">
   <div class="column">
     <span class="symbol">{{ data().symbol }}</span>
-    <span class="share">{{ data().share }} shares</span>
+    <span class="share">{{ data().share | number : "1.2-2" }} shares</span>
   </div>
   <div class="price">
     {{ data().ask | currency : "AUD" : "symbol-narrow" : "1.2-2" }}

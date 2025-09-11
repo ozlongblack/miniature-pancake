@@ -4,21 +4,22 @@ import {
   inject,
   OnInit,
 } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
 import {
+  IonContent,
   IonHeader,
   IonItem,
   IonLabel,
   IonList,
   IonToolbar,
-  IonContent,
   IonSearchbar,
 } from '@ionic/angular/standalone';
+import { Observable, Subject, map, of, withLatestFrom } from 'rxjs';
+
+import { CardComponent } from '@components/card/card.component';
 import { InstrumentComponent } from '@components/instrument/instrument.component';
 import { Instrument, Stock } from '@interfaces/stock';
-import { CardComponent } from '@components/card/card.component';
 import { StockService } from '@services/stock.service';
-import { map, Observable, of, shareReplay } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-discover',
@@ -40,8 +41,8 @@ import { AsyncPipe } from '@angular/common';
 })
 export class DiscoverPage implements OnInit {
   stockService = inject(StockService);
+  searchTerm$ = new Subject<string>();
 
-  stocks$: Observable<Stock[]> = of([]);
   filteredStocks$: Observable<Stock[]> = of([]);
 
   readonly mockSearchedData = [
@@ -105,8 +106,17 @@ export class DiscoverPage implements OnInit {
   } as Stock;
 
   ngOnInit() {
-    this.stocks$ = this.stockService.stocks$.pipe(
-      shareReplay({ bufferSize: 1, refCount: true })
+    this.filteredStocks$ = this.searchTerm$.pipe(
+      withLatestFrom(this.stockService.stocks$),
+      map(([searchTerm, stocks]) => {
+        if (searchTerm) {
+          return stocks.filter((item) =>
+            item.symbol.toLocaleLowerCase().startsWith(searchTerm.toLowerCase())
+          );
+        }
+
+        return [];
+      })
     );
 
     this.stockService.loadStocks();
@@ -115,16 +125,6 @@ export class DiscoverPage implements OnInit {
   handleSearch(event: Event) {
     const target = event.target as HTMLIonSearchbarElement;
 
-    if (target.value) {
-      this.filteredStocks$ = this.stocks$.pipe(
-        map((stocks) =>
-          stocks.filter((item) =>
-            item.symbol.toLowerCase().startsWith(target.value!.toLowerCase())
-          )
-        )
-      );
-    } else {
-      this.filteredStocks$ = of([]);
-    }
+    this.searchTerm$.next(target.value as string);
   }
 }
