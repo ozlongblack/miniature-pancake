@@ -1,3 +1,4 @@
+@if (data !== null) {
 <div class="section">
   <h3 class="title">
     {{ data.symbol }}
@@ -24,13 +25,16 @@
     </div>
     <div class="input">
       <ion-input
-        label="Amount"
+        label="Shares"
         labelPlacement="stacked"
-        placeholder="Amount"
+        placeholder="Shares"
         value="500"
         [debounce]="500"
       ></ion-input>
     </div>
   </div>
 </div>
-<div><app-swipe-button (complete)="dismiss()"></app-swipe-button></div>
+<div>
+  <app-swipe-button (complete)="dismiss()"></app-swipe-button>
+</div>
+}

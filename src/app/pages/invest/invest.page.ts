@@ -2,26 +2,26 @@ import { AsyncPipe, CurrencyPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  inject,
   OnInit,
+  inject,
 } from '@angular/core';
+import {
+  IonContent,
+  IonHeader,
+  IonModal,
+  IonToolbar,
+  ModalController,
+} from '@ionic/angular/standalone';
+import { Observable, combineLatest, map, of } from 'rxjs';
+
+import { CardComponent } from '@components/card/card.component';
+import { InstrumentComponent } from '@components/instrument/instrument.component';
+import { CardType } from '@interfaces/card';
 import { Instrument, Stock } from '@interfaces/stock';
 import { User } from '@interfaces/user';
+import { InvestService } from '@services/invest.service';
 import { StockService } from '@services/stock.service';
 import { UserService } from '@services/user.service';
-import {
-  IonHeader,
-  IonToolbar,
-  IonContent,
-  IonModal,
-  ModalController,
-  ToastController,
-} from '@ionic/angular/standalone';
-import { combineLatest, map, Observable, of, shareReplay } from 'rxjs';
-import { CardComponent } from '@components/card/card.component';
-import { CardType } from '@interfaces/card';
-import { InstrumentComponent } from '@components/instrument/instrument.component';
-import { ModalComponent } from '@components/modal/modal.component';
 
 @Component({
   selector: 'app-invest',
@@ -40,10 +40,10 @@ import { ModalComponent } from '@components/modal/modal.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InvestPage implements OnInit {
+  investService = inject(InvestService);
   stockService = inject(StockService);
   userService = inject(UserService);
   modalController = inject(ModalController);
-  toastController = inject(ToastController);
 
   stocks$: Observable<Stock[]> = of([]);
   user$: Observable<User | null> = of(null);
@@ -53,12 +53,13 @@ export class InvestPage implements OnInit {
   cardType = CardType;
 
   ngOnInit() {
-    this.stocks$ = this.stockService.stocks$.pipe(
-      shareReplay({ bufferSize: 1, refCount: true })
-    );
-    this.user$ = this.userService.user$.pipe(
-      shareReplay({ bufferSize: 1, refCount: true })
-    );
+    this.loadData();
+    this.init();
+  }
+
+  private loadData() {
+    this.stocks$ = this.stockService.stocks$;
+    this.user$ = this.userService.user$;
 
     this.holdings$ = combineLatest([this.stocks$, this.user$]).pipe(
       map(([stocks, user]) => {
@@ -77,48 +78,14 @@ export class InvestPage implements OnInit {
     );
 
     this.trending$ = this.stocks$.pipe(map((stocks) => stocks.slice(0, 8)));
+  }
 
+  private init() {
     this.stockService.loadStocks();
     this.userService.loadUser();
   }
 
   async handleClick(stock: Stock) {
-    const modal = await this.modalController.create({
-      component: ModalComponent,
-      componentProps: {
-        initialBreakpoint: 0.5,
-        breakpoints: [0, 0.5],
-        data: stock,
-      },
-    });
-
-    modal.onWillDismiss().then(async (result) => {
-      if (result) {
-        const previous = this.userService.loadCachedUser();
-
-        this.userService.updateUser({
-          equity: (previous?.equity || 0) + result.data.shares,
-          holdings: [
-            ...((previous?.holdings as Instrument[]) || []),
-            {
-              symbol: result.data.symbol,
-              share: result.data.amount,
-            },
-          ],
-        });
-
-        const toast = await this.toastController.create({
-          message: `${result.data.symbol} successfully purchased!`,
-          position: 'top',
-          color: 'success',
-          duration: 3000,
-          cssClass: 'custom-toast',
-        });
-
-        await toast.present();
-      }
-    });
-
-    return await modal.present();
+    this.investService.openModal(stock);
   }
 }

@@ -2,11 +2,12 @@ import { CurrencyPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  inject,
   Input,
+  inject,
 } from '@angular/core';
-import { Stock } from '@interfaces/stock';
 import { IonInput, ModalController } from '@ionic/angular/standalone';
+
+import { Stock } from '@interfaces/stock';
 import { SwipeButtonComponent } from '../swipe-button/swipe-button.component';
 
 @Component({
@@ -17,13 +18,13 @@ import { SwipeButtonComponent } from '../swipe-button/swipe-button.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ModalComponent {
-  @Input() data!: Stock;
+  @Input() data: Stock | null = null;
 
   modalController = inject(ModalController);
 
   dismiss() {
     this.modalController.dismiss({
-      symbol: this.data.symbol,
+      symbol: this.data?.symbol,
       price: 0,
       amount: 5.1,
       shares: 500,

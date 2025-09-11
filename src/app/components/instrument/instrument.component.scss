@@ -5,6 +5,7 @@
   grid-template-columns: 1fr auto 80px;
   align-items: center;
   gap: $spacer * 3;
+  height: 100%;
 
   &.hide-change {
     grid-template-columns: 1fr auto;
